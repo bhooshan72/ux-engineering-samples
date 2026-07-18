@@ -1,0 +1,44 @@
+@use './styles/tokens' as t;
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  // Hidden until focused, then pinned to the top-left for keyboard users.
+  &__skip-link {
+    position: absolute;
+    left: t.$space-2;
+    top: -3rem;
+    z-index: 10;
+    padding: t.$space-2 t.$space-3;
+    background-color: t.$color-bg;
+    border: 1px solid t.$color-border;
+    border-radius: t.$radius-sm;
+    transition: top t.$transition-fast;
+
+    &:focus {
+      top: t.$space-2;
+      text-decoration: none;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    width: 100%;
+    max-width: t.$layout-max-width;
+    margin: 0 auto;
+    padding: t.$space-6 t.$space-4;
+
+    h1 {
+      font-size: t.$font-size-xl;
+      line-height: t.$line-height-tight;
+      margin-bottom: t.$space-4;
+    }
+
+    p {
+      color: t.$color-fg-muted;
+      max-width: 60ch;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+@use '../../styles/tokens' as t;
+
+.header {
+  border-bottom: 1px solid t.$color-border;
+  background-color: t.$color-bg;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: t.$space-4;
+    height: t.$layout-header-height;
+    width: 100%;
+    max-width: t.$layout-max-width;
+    margin: 0 auto;
+    padding: 0 t.$space-4;
+  }
+
+  &__brand {
+    color: t.$color-fg;
+    font-weight: t.$font-weight-bold;
+    font-size: t.$font-size-lg;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: t.$space-4;
+  }
+
+  &__link {
+    color: t.$color-fg-muted;
+    font-weight: t.$font-weight-medium;
+    transition: color t.$transition-fast;
+
+    &:hover {
+      color: t.$color-fg;
+      text-decoration: none;
+    }
+  }
+}

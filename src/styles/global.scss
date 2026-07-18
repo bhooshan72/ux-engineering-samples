@@ -1,0 +1,64 @@
+@use 'tokens' as t;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: t.$color-bg;
+  color: t.$color-fg;
+  font-family: t.$font-sans;
+  font-size: t.$font-size-base;
+  line-height: t.$line-height-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: t.$color-accent;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+code {
+  font-family: t.$font-mono;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background-color: t.$color-surface;
+  border-radius: t.$radius-sm;
+}
+
+// Visible, consistent focus for keyboard users.
+:focus-visible {
+  outline: 2px solid t.$color-focus-ring;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
