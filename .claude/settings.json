@@ -3,7 +3,15 @@
     "allow": [
       "Bash(npm --version)",
       "Bash(npm install *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git checkout *)",
+      "Bash(git reset *)",
+      "Bash(git stash *)",
+      "Bash(git push *)",
+      "Bash(git ls-remote *)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('.claude/settings.json','utf8'\\)\\); console.log\\('valid JSON'\\)\")",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
