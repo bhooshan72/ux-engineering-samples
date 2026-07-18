@@ -1,23 +1,29 @@
-import type { CSSProperties } from 'react'
 import type { Label } from './types.ts'
-import { readableTextColor } from './utils.ts'
+import { labelToChipType } from './labelType.ts'
+import { Chip } from '../ds/Chip/Chip.tsx'
 
 interface LabelChipProps {
   label: Label
 }
 
-// A pill tinted with the label's own color. The name text is always present —
-// color is never the only signal — and the text color is chosen for contrast.
+// Thin adapter: the design system's Chip is a <span> with six semantic types,
+// while the Labels cell is a <ul>. The <li> keeps the list semantics; the Chip
+// supplies the visuals. GitHub's per-label colour is intentionally dropped —
+// see labelType.ts.
+//
+// The leading icon is suppressed here: it is keyed to the chip *type*, not the
+// label, so it repeats down the column without adding information — and the
+// `regular` and `primary` glyphs actively mislead (a "?" on a plain version tag,
+// an "open in new" arrow on a chip that isn't a link).
 function LabelChip({ label }: LabelChipProps) {
-  const background = `#${label.color}`
-  const style = {
-    '--chip-bg': background,
-    '--chip-fg': readableTextColor(label.color),
-  } as CSSProperties
-
   return (
-    <li className="label-chip" style={style}>
-      {label.name}
+    <li className="label-chip">
+      <Chip
+        label={label.name}
+        type={labelToChipType(label.name)}
+        size="sm"
+        iconLeft={false}
+      />
     </li>
   )
 }
