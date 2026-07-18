@@ -1,4 +1,5 @@
 import Header from './components/Header/Header.tsx'
+import IssuesTable from './components/IssuesTable/IssuesTable.tsx'
 import './App.scss'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <code>src/components</code>, style with SCSS using the design tokens in{' '}
           <code>src/styles/tokens.scss</code>.
         </p>
+        <IssuesTable />
       </main>
     </div>
   )

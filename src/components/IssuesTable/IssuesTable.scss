@@ -1,0 +1,239 @@
+@use '../../styles/tokens' as t;
+
+// ── Table (shared by skeleton + success) ──────────────────────────────
+.issues-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: t.$font-size-sm;
+  table-layout: fixed;
+
+  caption {
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: t.$space-2 t.$space-3;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid t.$color-border;
+    overflow-wrap: break-word;
+  }
+
+  thead th {
+    font-weight: t.$font-weight-medium;
+    color: t.$color-fg-muted;
+    border-bottom: 2px solid t.$color-border;
+    white-space: nowrap;
+  }
+
+  tbody tr:hover {
+    background-color: t.$color-surface;
+  }
+
+  &__muted {
+    color: t.$color-fg-muted;
+  }
+
+  // Column sizing — fixed layout keeps skeleton and data aligned.
+  &__col--num {
+    width: 4.5rem;
+    font-family: t.$font-mono;
+    white-space: nowrap;
+  }
+
+  &__col--title {
+    width: auto;
+  }
+
+  &__col--author {
+    width: 9rem;
+  }
+
+  &__col--labels {
+    width: 30%;
+  }
+
+  &__col--comments {
+    width: 6rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__col--created {
+    width: 8rem;
+    white-space: nowrap;
+    color: t.$color-fg-muted;
+  }
+}
+
+// Right-align the comments column. Element-qualified so it outranks the
+// generic `.issues-table th, td` rule (same specificity, but later in source).
+th.issues-table__col--comments,
+td.issues-table__col--comments {
+  text-align: right;
+}
+
+// ── Label chips ───────────────────────────────────────────────────────
+.label-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.$space-1;
+}
+
+.label-chip {
+  --chip-bg: #{t.$color-surface};
+  --chip-fg: #{t.$color-fg};
+
+  display: inline-block;
+  padding: 0.1rem t.$space-2;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  background-color: var(--chip-bg);
+  color: var(--chip-fg);
+  // Subtle edge so very light labels stay visible on white.
+  border: 1px solid color-mix(in srgb, var(--chip-bg) 75%, black);
+}
+
+// ── Focus ─────────────────────────────────────────────────────────────
+// Explicit 2px ring with offset on every interactive element in this
+// component. Reinforces the global :focus-visible so the ring is guaranteed
+// even on the filled Retry button (offset pushes it clear of the fill).
+.issues-table a,
+.empty-state__link,
+.error-panel__retry {
+  &:focus-visible {
+    outline: 2px solid t.$color-focus-ring;
+    outline-offset: 2px;
+  }
+}
+
+// ── Skeleton ──────────────────────────────────────────────────────────
+.skeleton-bar {
+  display: block;
+  height: 0.75rem;
+  border-radius: t.$radius-sm;
+  background-color: t.$color-skeleton-base;
+  background-image: linear-gradient(
+    90deg,
+    t.$color-skeleton-base 0%,
+    t.$color-skeleton-shine 50%,
+    t.$color-skeleton-base 100%
+  );
+  background-size: 800px 100%;
+  animation: issues-shimmer 1.4s linear infinite;
+}
+
+// Vary the widths a little so rows don't look mechanically identical.
+.issues-table--skeleton {
+  tbody tr:hover {
+    background-color: transparent;
+  }
+
+  .issues-table__col--title .skeleton-bar {
+    width: 85%;
+  }
+
+  .issues-table__col--author .skeleton-bar {
+    width: 70%;
+  }
+
+  .issues-table__col--created .skeleton-bar {
+    width: 60%;
+  }
+}
+
+@keyframes issues-shimmer {
+  0% {
+    background-position: 400px 0;
+  }
+  100% {
+    background-position: -400px 0;
+  }
+}
+
+// Respect reduced-motion: drop the moving gradient entirely and show a calm,
+// static placeholder instead of an animated shimmer.
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-bar {
+    animation: none;
+    background-image: none;
+    background-color: t.$color-skeleton-base;
+  }
+}
+
+// ── Error panel ───────────────────────────────────────────────────────
+.error-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: t.$space-3;
+  padding: t.$space-4;
+  background-color: t.$color-danger-bg;
+  border: 1px solid t.$color-danger-border;
+  border-radius: t.$radius-md;
+
+  &__icon {
+    flex-shrink: 0;
+    color: t.$color-danger;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-weight: t.$font-weight-medium;
+    color: t.$color-danger;
+    margin-bottom: t.$space-1;
+  }
+
+  &__message {
+    color: t.$color-fg-muted;
+    font-size: t.$font-size-sm;
+  }
+
+  &__retry {
+    flex-shrink: 0;
+    padding: t.$space-2 t.$space-4;
+    font: inherit;
+    font-weight: t.$font-weight-medium;
+    color: t.$color-bg;
+    background-color: t.$color-accent;
+    border: none;
+    border-radius: t.$radius-sm;
+    cursor: pointer;
+    transition: background-color t.$transition-fast;
+
+    &:hover {
+      background-color: t.$color-accent-hover;
+    }
+  }
+}
+
+// ── Empty state ───────────────────────────────────────────────────────
+.empty-state {
+  padding: t.$space-8 t.$space-4;
+  text-align: center;
+  border: 1px dashed t.$color-border;
+  border-radius: t.$radius-md;
+
+  &__title {
+    font-size: t.$font-size-lg;
+    font-weight: t.$font-weight-medium;
+    margin-bottom: t.$space-2;
+  }
+
+  &__body {
+    max-width: 44ch;
+    margin: 0 auto t.$space-4;
+    color: t.$color-fg-muted;
+  }
+
+  &__link {
+    font-weight: t.$font-weight-medium;
+  }
+}
