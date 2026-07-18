@@ -1,0 +1,92 @@
+/* ============================================================
+   Variables read from the Figma library "design-System-Lineaje"
+   File: medjjnBwvRXB96FrEbENRc
+
+   Two sources, deliberately kept separate from the vendored
+   tokens.css (which exports only what the components needed):
+
+   1. TYPOGRAPHY — read live via MCP get_variable_defs on frame
+      2484:113 on 2026-07-18.
+   2. SCALE + RADIUS — from the design-tokens.tokens.json export
+      (Tokens Studio / figmaDesignTokens plugin), Brand + Alias
+      collections.
+
+   ⚠ MODES. The Responsive and Mapped collections are multi-mode.
+   The JSON export captured a DIFFERENT mode than the live MCP read
+   and than tokens.css:
+     - JSON mapped.surface.page -> #000000 (dark); tokens.css has #ffffff
+     - JSON responsive h1 = 36/44; live MCP read H1 = 44/56
+   Only mode-independent values are transcribed here: the Brand
+   primitive scale, and Alias radii that reference it. Colours and
+   heading sizes are NOT taken from the JSON.
+
+   Figma stores these as raw numbers. Units are added deliberately:
+   a unitless `line-height: 24` means 24x the font size, not 24px.
+
+   Not covered by `npm run check:ds` — that only guards the vendored
+   files. Re-read from Figma when the library changes.
+   ============================================================ */
+:root {
+  /* --- Font/Copy (live MCP read) --- */
+  --font-copy-x-small-text-size: 8px;
+  --font-copy-x-small-line-height: 14px;
+  --font-copy-caption-text-size: 10px;
+  --font-copy-caption-line-height: 16px;
+  --font-copy-body-sm-text-size: 12px;
+  --font-copy-body-sm-line-height: 16px;
+  --font-copy-body-text-size: 14px;
+  --font-copy-body-line-height: 20px;
+  --font-copy-body-lg-text-size: 16px;
+  --font-copy-body-lg-line-height: 24px;
+
+  /* --- Font/Headings (live MCP read — see MODES note above) --- */
+  --font-headings-h6-text-size: 16px;
+  --font-headings-h6-line-height: 24px;
+  --font-headings-h5-text-size: 20px;
+  --font-headings-h5-line-height: 28px;
+  --font-headings-h4-text-size: 24px;
+  --font-headings-h4-line-height: 32px;
+  --font-headings-h3-text-size: 28px;
+  --font-headings-h3-line-height: 36px;
+  --font-headings-h2-text-size: 36px;
+  --font-headings-h2-line-height: 44px;
+  --font-headings-h1-text-size: 44px;
+  --font-headings-h1-line-height: 56px;
+
+  /* --- Fonts ---
+     Figma stores style names ("Bold"), not numeric weights. tokens.css
+     already converts two (--fonts-regular: 400, --fonts-semi-bold: 600);
+     700 follows that convention and Inter's standard axis. */
+  --fonts-bold: 700;
+
+  /* --- Brand/Scale (JSON export; mode-independent primitives) ---
+     tokens.css already defines 25/50/100/200/300/400 — not repeated.
+     NOTE the ramp is NOT linear: it is n/25 px up to Scale/1000 (40),
+     then widens. 1100 is 48, not 44. Do not extrapolate. */
+  --scale-0: 0;
+  --scale-500: 20px;
+  --scale-600: 24px;
+  --scale-700: 28px;
+  --scale-800: 32px;
+  --scale-900: 36px;
+  --scale-1000: 40px;
+  --scale-1100: 48px;
+  --scale-1200: 56px;
+  --scale-1300: 64px;
+  --scale-1400: 72px;
+  --scale-1500: 96px;
+  --scale-1600: 128px;
+  --scale-1700: 256px;
+  --scale-1800: 512px;
+
+  /* --- Alias/Border Radius (JSON export; aliases onto Brand/Scale) ---
+     tokens.css already defines --border-radius-200 (8px).
+     ⚠ Figma's "round" is Scale/1800 = 512px, but tokens.css hardcodes the
+     radius-round property as 9999px. Both fully round a chip, so nothing
+     renders differently — but the values disagree. Not reconciled here. */
+  --border-radius-none: 0;
+  --border-radius-25: 1px;
+  --border-radius-50: 2px;
+  --border-radius-100: 4px;
+  --border-radius-300: 12px;
+}

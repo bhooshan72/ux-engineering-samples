@@ -1,61 +1,108 @@
 // Design tokens
 // Single source of truth for the visual language. Consume via `@use` in
 // component stylesheets, e.g. `@use '../../styles/tokens' as t;` then `t.$color-fg`.
+//
+// Values below are aliases onto the design-system custom properties defined in
+// `ds/tokens.css` (vendored from my-design-system-react, Figma file
+// medjjnBwvRXB96FrEbENRc). Re-sync by overwriting that file wholesale.
+//
+// Because these are `var()` references and not literals, they cannot be used in
+// SCSS arithmetic (`t.$space-4 * 2`) or SCSS colour functions (`darken(...)`).
+// No call site does either today. Use `calc()` / `color-mix()` if you need math.
+//
+// Tokens marked LOCAL have no design-system counterpart and keep their original
+// literal value — the reason is noted inline.
 
 // ── Color ─────────────────────────────────────────────────────────────
-$color-bg:            #ffffff;
-$color-surface:       #f6f7f9;
-$color-fg:            #1a1d21;
-$color-fg-muted:      #5c6470;
-$color-border:        #e2e5ea;
-$color-accent:        #3b5bdb;
-$color-accent-hover:  #2f49af;
-$color-focus-ring:    #4c6ef5;
+$color-bg:            var(--surface-page);                    // #ffffff
+$color-surface:       var(--surface-page-secondary);          // #eaedf1 (was #f6f7f9)
+$color-fg:            var(--text-default-body);               // #1e2125 (was #1a1d21)
+$color-fg-muted:      var(--text-default-caption);            // #3c424a (was #5c6470)
+$color-border:        var(--border-secondary);                // #eaedf1 (was #e2e5ea)
+$color-accent:        var(--surface-primary-default);         // #7781fc (was #3b5bdb)
+$color-accent-hover:  var(--surface-primary-default-hover);   // #5f67ca (was #2f49af)
+$color-focus-ring:    var(--border-primary-focus);            // #7781fc (was #4c6ef5)
 
 // Feedback
-$color-danger:        #c92a2a;
-$color-danger-bg:     #fff5f5;
+// The DS error ramp is lighter and pinker than the original red. --text-error-default
+// is the semantic match for error text even though --surface-error-default-hover
+// (#ca4a50) is closer by hex; picking by meaning, not by resemblance.
+$color-danger:        var(--text-error-default);              // #f35b60 (was #c92a2a)
+$color-danger-bg:     var(--surface-error-light);             // #ffe1e3 (was #fff5f5)
+// LOCAL — the DS has no error *border* token. --surface-error-disabled (#fcc2c6) is
+// a near hex match but means "disabled error surface"; using it here would encode
+// the wrong meaning. Left literal until the DS defines a border-error token.
 $color-danger-border: #ffc9c9;
 
 // Skeleton shimmer
-$color-skeleton-base:  #e9ecef;
-$color-skeleton-shine: #f4f5f7;
+$color-skeleton-base:  var(--surface-disabled-light);         // #eaedf1 (was #e9ecef)
+$color-skeleton-shine: #f4f5f7;                               // LOCAL — no second shade in DS
 
 // ── Typography ────────────────────────────────────────────────────────
-$font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
-  sans-serif;
-$font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+$font-sans: var(--fonts-inter);
+$font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace; // LOCAL
 
-$font-size-sm:   0.875rem;
-$font-size-base: 1rem;
-$font-size-lg:   1.25rem;
-$font-size-xl:   2rem;
+// Sourced from the Figma library (see ds/figma-typography.css), NOT from
+// tokens.css — which exports only Font/Copy/body, the size chips and table
+// cells use. Figma defines a full scale: x-small/caption/body-sm/body/body-lg
+// plus H1-H6, each with a paired line height.
+//
+// All four mappings below are value-preserving: the rendered sizes are
+// identical to the literals they replaced. Only their provenance changed.
+$font-size-sm:   var(--font-copy-body-text-size);             // 14px — was 0.875rem
+$font-size-base: var(--font-copy-body-lg-text-size);          // 16px — was 1rem
+$font-size-lg:   var(--font-headings-h5-text-size);           // 20px — was 1.25rem
+$font-size-xl:   2rem;                                        // LOCAL — see note
 
-$line-height-tight: 1.2;
-$line-height-base:  1.5;
+// NOTE: 32px falls between H3 (28) and H2 (36); Figma has no 32px step. Picking
+// one changes the <h1>'s rendered size, so it stays literal pending a decision.
 
-$font-weight-regular: 400;
-$font-weight-medium:  500;
-$font-weight-bold:    700;
+// $line-height-base pairs with $font-size-base: body-lg is 16/24, exactly the
+// 1.5 ratio this project already used. Expressed in px, since a unitless
+// var() carrying "24" would mean 24x the font size.
+$line-height-tight: 1.2;                                      // LOCAL — see note
+$line-height-base:  var(--font-copy-body-lg-line-height);     // 24px = 1.5 x 16px
+
+// NOTE: $line-height-tight is used on the <h1> alongside $font-size-xl. Both
+// resolve together once the heading step above is chosen — H2 is 36/44, H3 is
+// 28/36, neither of which is 1.2 against 32px.
+
+$font-weight-regular: var(--fonts-regular);                   // 400
+$font-weight-medium:  var(--fonts-semi-bold);                 // 600 (was 500)
+$font-weight-bold:    var(--fonts-bold);                      // 700 — Fonts/Bold
 
 // ── Spacing (4px base scale) ──────────────────────────────────────────
-$space-1: 0.25rem;
-$space-2: 0.5rem;
-$space-3: 0.75rem;
-$space-4: 1rem;
-$space-5: 1.5rem;
-$space-6: 2rem;
-$space-8: 3rem;
+// Figma's Brand/Scale runs 0-1800. tokens.css exports only 25-400; the rest
+// come from ds/figma-variables.css. The ramp is n/25 px only up to Scale/1000
+// (40) and then widens — Scale/1100 is 48, not 44 — so do not extrapolate.
+$space-1: var(--scale-100);                                   // 4px
+$space-2: var(--scale-200);                                   // 8px
+$space-3: var(--scale-300);                                   // 12px
+$space-4: var(--scale-400);                                   // 16px
+$space-5: var(--scale-600);                                   // 24px — was 1.5rem
+$space-6: var(--scale-800);                                   // 32px — was 2rem
+$space-8: var(--scale-1100);                                  // 48px — was 3rem
 
 // ── Radius ────────────────────────────────────────────────────────────
-$radius-sm: 4px;
-$radius-md: 8px;
-$radius-lg: 12px;
+// Figma's Alias/Border Radius has seven steps (none/25/50/100/200/300/round),
+// each aliasing Brand/Scale. All three sizes here map exactly. The design
+// system's own --radius-sm/md/lg are self-declared legacy and NOT in Figma;
+// they are deliberately not used.
+$radius-sm: var(--border-radius-100);                         // 4px
+$radius-md: var(--border-radius-200);                         // 8px
+$radius-lg: var(--border-radius-300);                         // 12px
+
+// ⚠ Figma's Border Radius/round is Scale/1800 = 512px; tokens.css hardcodes
+// 9999px. Both fully round a pill, so this renders identically — but the two
+// sources disagree. Using the design system's value.
+$radius-round: var(--radius-round);                           // 9999px
 
 // ── Layout ────────────────────────────────────────────────────────────
-$layout-max-width:  960px;
-$layout-header-height: 3.5rem;
+// Not tokenized in the design system.
+$layout-max-width:  960px;                                    // LOCAL
+$layout-header-height: 3.5rem;                                // LOCAL
 
 // ── Motion ────────────────────────────────────────────────────────────
-$transition-fast: 120ms ease;
-$transition-base: 200ms ease;
+// Not tokenized in the design system.
+$transition-fast: 120ms ease;                                 // LOCAL
+$transition-base: 200ms ease;                                 // LOCAL

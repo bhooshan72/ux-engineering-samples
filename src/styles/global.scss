@@ -1,3 +1,6 @@
+// Defines the custom properties that tokens.scss aliases. Must load first.
+@use 'ds/tokens.css';
+@use 'ds/figma-variables.css';
 @use 'tokens' as t;
 
 *,
