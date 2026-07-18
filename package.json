@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "check:ds": "node scripts/check-ds-sync.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "material-icons": "^1.13.14",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
