@@ -83,19 +83,11 @@ td.issues-table__col--comments {
   gap: t.$space-1;
 }
 
+// The design system's Chip owns the pill's appearance entirely (padding,
+// radius, border, type colours). This <li> exists only to keep the list
+// semantics intact, so it must not impose any box of its own.
 .label-chip {
-  --chip-bg: #{t.$color-surface};
-  --chip-fg: #{t.$color-fg};
-
-  display: inline-block;
-  padding: 0.1rem t.$space-2;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  background-color: var(--chip-bg);
-  color: var(--chip-fg);
-  // Subtle edge so very light labels stay visible on white.
-  border: 1px solid color-mix(in srgb, var(--chip-bg) 75%, black);
+  display: inline-flex;
 }
 
 // ── Focus ─────────────────────────────────────────────────────────────

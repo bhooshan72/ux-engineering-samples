@@ -1,0 +1,135 @@
+/* ============================================================
+   Design tokens — sourced from Figma "design-System-Test"
+   File: medjjnBwvRXB96FrEbENRc
+   Names mirror the Figma variable paths (slashes -> hyphens).
+   ============================================================ */
+:root {
+  /* --- Foundations --- */
+  --foundations-white: #ffffff;
+
+  /* --- Scale / spacing --- */
+  --scale-25: 1px;
+  --scale-50: 2px;
+  --scale-100: 4px;
+  --scale-200: 8px;
+  --scale-300: 12px;
+  --scale-400: 16px;
+
+  /* --- Surface --- */
+  --surface-default: #ffffff;
+  --surface-page: #ffffff;
+  --surface-primary-default: #7781fc;
+  --surface-primary-default-hover: #5f67ca;
+  --surface-action-hover-light: #f1f2ff;
+  --surface-disabled-default: #d5dbe3;
+  --border-disabled-default: #c1c9d5;
+  --icon-disabled-default: #c1c9d5;
+
+  /* --- Text --- */
+  --text-default-body: #1e2125;
+  --text-primary-default: #7781fc;
+  --text-primary-default-hover: #5f67ca;
+  --text-primary-on-color: #ffffff;
+  --text-primary-on-color-hover: #ffffff;
+  --text-disabled-default: #97a5b9;
+  --text-disabled-on-color: #acb7c7;
+
+  /* --- Primary ramp --- */
+  --primary-300: #adb3fd;
+
+  /* --- Icon --- */
+  --icon-primary-neutral-dark: #5b636f;
+  --icon-primary-on-color-hover: #c9cdfe;
+  --icon-primary-on-color: #e4e6fe;
+  --icon-primary-default-hover: #5f67ca;
+
+  /* --- Border --- */
+  --border-secondary: #eaedf1;
+  --border-page-secondary: #eaedf1;
+  --border-primary-default: #7781fc;
+  --border-primary-default-hover: #5f67ca;
+  --border-primary-focus: #7781fc;
+
+  /* --- Typography --- */
+  --fonts-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --fonts-semi-bold: 600;
+  --fonts-regular: 400;
+  --font-size-body: 14px;
+  --line-height-body: 16px;
+  --letter-spacing-body: 0.25px;
+
+  /* --- Additional component tokens (Radio / Switch / Tag) --- */
+  --surface-primary-neutral: #c1c9d5;
+  --surface-primary-neutral-hover: #acb7c7;
+  --surface-page-secondary: #eaedf1;
+  --surface-action-hover: #5f67ca;
+  --border-medium: #97a5b9;
+  --text-on-color-body: #ffffff;
+  --radius-round: 9999px;
+
+  /* --- Snackbar status colors --- */
+  --surface-success-default-hover: #00bc89;
+  --surface-error-default-hover: #ca4a50;
+  --surface-warning-default: #ff8e40;
+  --surface-information-default: #3496ff;
+  --border-radius-200: 8px;
+
+  /* --- Badge --- */
+  --text-default-placeholder: #798494;
+  --border-dark: #5b636f;
+  --surface-error-default: #f35b60;
+  --text-error-default: #f35b60;
+  --text-warning-default-hover: #de722d;
+
+  /* --- Chip --- */
+  --surface-error-light: #ffe1e3;
+  --surface-error-default-hover: #ca4a50;
+  --text-error-default-hover: #ca4a50;
+  --text-error-on-color: #ffe1e3;
+  --surface-warning-light: #ffe9e1;
+  --surface-warning-default-hover: #de722d;
+  --text-warning-on-color: #ffe9e1;
+  --surface-success-light: #dffaed;
+  --border-success-dark: #00926c;
+  --text-success-dark: #00926c;
+  --text-success-on-color: #dffaed;
+  --surface-disabled-light: #eaedf1;
+
+  /* --- Switch-spl (status disabled shades) --- */
+  --surface-error-disabled: #fcc2c6;
+  --surface-success-disabled: #baf6dd;
+  /* transition/loading label shades */
+  --text-error-on-color-hover: #fcc2c6;
+  --text-success-on-color-hover: #baf6dd;
+
+  /* --- Chat call-out --- */
+  --text-default-caption: #3c424a;
+  --surface-primary-light: #f1f2ff;
+  --border-primary-light: #d6d9fe;
+  --border-default: #ffffff;
+  --gradient-primary: linear-gradient(215.43deg, #e45f0c 22.585%, #9e009d 56.509%, #6a1baf 87.937%);
+
+  /* ============================================================
+     Legacy aliases — kept so the not-yet-aligned components
+     (Checkbox, Radio, Switch, Tag, Badge, Link, Tab, Snackbar)
+     still render. These are NOT in the Figma library.
+     ============================================================ */
+  --brand-white: #ffffff;
+  --color-primary: #7781fc;
+  --color-primary-hover: #5f67ca;
+  --color-primary-light: #f1f2ff;
+  --color-on-primary: #ffffff;
+  --color-text-heading: #1e2125;
+  --color-text-body: #3c424a;
+  --color-text-caption: #5b636f;
+  --color-text-placeholder: #97a5b9;
+  --color-border-default: #d8d8d8;
+  --color-success: #00bc89;
+  --color-error: #ca4a50;
+  --color-warning: #de722d;
+  --color-info: #297bda;
+  --font-family: var(--fonts-inter);
+  --font-body: 14px;
+  --lh-body: 20px;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px;
+}

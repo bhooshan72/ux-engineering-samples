@@ -1,0 +1,29 @@
+{
+  "$comment": "Files copied out of my-design-system-react. `sourceSha256` is the hash of the UPSTREAM file at the moment it was vendored — not of our local copy, which may carry an added header comment. `npm run check:ds` re-hashes upstream and fails if it has moved, which is the signal to re-vendor. Update this file whenever you re-copy.",
+  "sourceRepo": "my-design-system-react",
+  "sourceRoot": "../my-design-system-react",
+  "vendoredAt": "2026-07-18",
+  "files": [
+    {
+      "source": "src/tokens/tokens.css",
+      "local": "src/styles/ds/tokens.css",
+      "sourceSha256": "57c5fb373d2394d3d6da909a55f9b415f211439aec08f7c04a5004b9ace12b59"
+    },
+    {
+      "source": "src/components/Chip/Chip.tsx",
+      "local": "src/components/ds/Chip/Chip.tsx",
+      "sourceSha256": "63f7f343f9a23b19823dcde55b76c1d62e4d998eeb12c58b3bf8a69a04230eba",
+      "localEdits": "Added a vendor-provenance header comment above the imports."
+    },
+    {
+      "source": "src/components/Chip/Chip.module.css",
+      "local": "src/components/ds/Chip/Chip.module.css",
+      "sourceSha256": "0abea9753af1831dcc68235c6c6a20c21dbdcdb87b46fa1c6359ba5dec976204"
+    },
+    {
+      "source": "src/components/Icon/Icon.tsx",
+      "local": "src/components/ds/Icon/Icon.tsx",
+      "sourceSha256": "7ac2cf16362a21ef8e181464c43d64753cf1c83f8307ff19b5db9ec6739c77d1"
+    }
+  ]
+}
